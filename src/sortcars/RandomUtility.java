@@ -1,6 +1,8 @@
 package sortcars;
 
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 
 public class RandomUtility {
@@ -29,9 +31,10 @@ public class RandomUtility {
         return random.nextInt(4);
     }
 
-    public static Car[] generateNCars(int n) {
+    public static LinkedList<Car> generateNCars(int n) {
 
-        Car[] cars = new Car[n];
+        //Car[] cars = new Car[n];
+        LinkedList<Car> cars = new LinkedList<>();
         HashSet<String> set = new HashSet<>();
         for(int i = 0; i < n; i++){
         {
@@ -42,19 +45,24 @@ public class RandomUtility {
             while (set.contains(serialNumber)) serialNumber = generateSerialNumber();
             set.add(serialNumber);
 
-            cars[i] = new Car(i, serialNumber, location, color);
+            cars.add(new Car(i, serialNumber, location, color));
+            //cars[i] = new Car(i, serialNumber, location, color);
 
         }
     }
         return cars;
     }
 
-    public static Car[][] generateKListsOfNCars(int n, int k) {
-        Car[][] cars = new Car[k][n];
+    public static List<LinkedList<Car>> generateKListsOfNCars(int n, int k) {
+        //Car[][] cars = new Car[k][n];
+        LinkedList<LinkedList<Car>> cars = new LinkedList<>();
         for (int i = 0; i < k; i++){
-            cars[i] = generateNCars(n);
+            cars.add(generateNCars(n));
+
         }
         return cars;
     }
+
+
 
 }
