@@ -1,26 +1,45 @@
 package sortcars;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SortJob {
 
 
 
-    private final List<Car> list;
+    private List<Car> list;
     private  int startIndex;
     private int endIndex;
-    private final boolean sortEntireList;
+    private boolean sortEntireList;
+    private boolean isCombineJob = false;
+    private List<SortJob> combineJob;
+    public int partialSortGroup;
+    public long partialSortCompletionTime;
+    public List<Long> partialSortCompletionTimeList;
 
     public SortJob(List<Car> list) {
         this.list = list;
         this.sortEntireList = true;
     }
 
-    public SortJob(List<Car> list, int startIndex, int endIndex) {
+    public SortJob(List<Car> list, int startIndex, int endIndex, int partialSortGroup) {
         this.list = list;
         this.startIndex = startIndex;
         this.endIndex = endIndex;
         this.sortEntireList = false;
+        this.partialSortGroup = partialSortGroup;
+    }
+
+    //special combineJobs constructor
+    public SortJob(List<SortJob> combineJob, boolean isCombineJob)
+    {
+    this.isCombineJob = true;
+    this.combineJob = combineJob;
+    partialSortCompletionTimeList = new ArrayList<>();
+    for (SortJob sortJob : combineJob)
+    {
+        partialSortCompletionTimeList.add(sortJob.partialSortCompletionTime);
+    }
     }
 
 
@@ -37,4 +56,7 @@ public class SortJob {
     }
 
     public boolean sortEntireList() { return sortEntireList; }
+
+    public List<SortJob> getCombineJob() { return combineJob; }
+    public boolean isCombineJob() { return isCombineJob; }
 }

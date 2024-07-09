@@ -1,9 +1,7 @@
 package sortcars;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.LongStream;
 
 import static sortcars.Car.writeCarArraysToFile;
 
@@ -13,9 +11,19 @@ public class QuicksortEngine {
     private final LinkedList<SortJob> jobs = new LinkedList<>();
     public final Object completionMonitor = new Object();
     public int activeThreads = 0;
+    private boolean isPartialSort = false;
+    private int partialGroupCount;
+    private ArrayList<List<Car>> finalSortedList;
+    public List<List<Long>> partialSortCompletionTimeList;
+
+
 
     QuicksortEngine(int maxThreads) {
         this.maxThreads = maxThreads;
+    }
+
+    public ArrayList<List<Car>> getFinalSortedList() {
+        return finalSortedList;
     }
 
     public LinkedList<Worker> getThreadPool() {
@@ -76,12 +84,14 @@ public class QuicksortEngine {
         cars.set(index2, temp);
     }
 
-    public void addJobs(List<List<Car>> carLists, List<Thread> threadlist) {
-        List<SortJob> jobList = executionStrategy(carLists, this.maxThreads);
+    public SortJob[] addJobs(List<List<Car>> carLists, List<Thread> threadlist, List<List<SortJob>> combineJobs) {
+        List<SortJob> jobList = executionStrategy(carLists, this.maxThreads, combineJobs);
+        SortJob[] jobReferences = jobList.toArray(new SortJob[0]);
+
         for (SortJob job : jobList) {
             synchronized (this) {
                 this.jobs.add(job);
-                if (activeThreads >= maxThreads) return;
+                if (activeThreads >= maxThreads) return jobReferences;
 
                 if (this.threadpool.isEmpty()) {
                     Thread newThread = new Thread(new Worker(this));
@@ -93,26 +103,32 @@ public class QuicksortEngine {
                 }
             }
         }
+        return jobReferences;
     }
 
-    public static List<SortJob> executionStrategy(List<List<Car>> carLists, int maxThreads,
-    List<List<SortJob>> combineJobs) {
+    public List<SortJob> executionStrategy(List<List<Car>> carLists, int maxThreads,
+                                           List<List<SortJob>> combineJobs) {
+        this.partialGroupCount = carLists.size();
+        this.finalSortedList = new ArrayList<>();
         List<SortJob> sortJobs = new ArrayList<>();
         int numberOfLists = carLists.size();
         double ratio = (double) maxThreads / numberOfLists;
 
         if (ratio <= 1.0) {
-            for (List<Car> list : carLists) {
+            for (int i = 0; i < carLists.size(); i++) {
+                List<Car> list = carLists.get(i);
                 sortJobs.add(new SortJob(list));
             }
         } else {
-            for (List<Car> list : carLists) {
+            this.isPartialSort = true;
+            for (int i = 0; i < carLists.size(); i++) {
+                List<Car> list = carLists.get(i);
                 List<SortJob> listGrouping = new ArrayList<>();
                 int sublistSize = (int) Math.ceil((double) list.size() / ratio);
                 int startIndex = 0;
                 while (startIndex < list.size()) {
                     int endIndex = Math.min(startIndex + sublistSize, list.size()) - 1;
-                    SortJob partialJob = new SortJob(list, startIndex, endIndex);
+                    SortJob partialJob = new SortJob(list, startIndex, endIndex,i);
                     sortJobs.add(partialJob);
                     listGrouping.add(partialJob);
                     startIndex = endIndex + 1;
@@ -123,19 +139,89 @@ public class QuicksortEngine {
         return sortJobs;
     }
 
-    public static List<Car> combineSortedLists(List<List<SortJob>> combineJobs){
-
+    public void addCombineJobs(List<List<SortJob>> combineJobs) {
+        for (List<SortJob> combineJob : combineJobs) {
+            synchronized (this) {
+                this.jobs.add(new SortJob(combineJob, true));
+                this.notify();
+            }
+        }
     }
 
+    public static List<Car> combineSortedSublists(List<SortJob> jobList) {
+        PriorityQueue<CarWithIndex> minHeap = new PriorityQueue<>(Comparator.comparing(carWithIndex -> carWithIndex.car));
+        List<Car> combinedList = new ArrayList<>();
+        List<Iterator<Car>> iterators = new ArrayList<>();
+
+        // Initialize the iterators and add the first element of each sorted sublist to the heap
+        for (SortJob job : jobList) {
+            List<Car> sortedSublist = job.getList().subList(job.getStartIndex(), job.getEndIndex() + 1);
+            if (!sortedSublist.isEmpty()) {
+                Iterator<Car> iterator = sortedSublist.iterator();
+                iterators.add(iterator);
+                if (iterator.hasNext()) {
+                    minHeap.add(new CarWithIndex(iterator.next(), iterators.size() - 1));
+                }
+            }
+        }
+
+        // Merge the sorted lists
+        while (!minHeap.isEmpty()) {
+            CarWithIndex smallestCarWithIndex = minHeap.poll();
+            combinedList.add(smallestCarWithIndex.car);
+
+            // Add the next element from the same iterator to the heap
+            Iterator<Car> iterator = iterators.get(smallestCarWithIndex.index);
+            if (iterator.hasNext()) {
+                minHeap.add(new CarWithIndex(iterator.next(), smallestCarWithIndex.index));
+            }
+        }
+
+        return combinedList;
+    }
+
+    // Helper class to keep track of the car and its iterator index
+    private static class CarWithIndex {
+        Car car;
+        int index;
+
+        CarWithIndex(Car car, int index) {
+            this.car = car;
+            this.index = index;
+        }
+    }
+
+
     public static void main(String[] args) throws InterruptedException {
-        List<List<Car>> cars = RandomUtility.generateKListsOfNCars(1000, 3);
-        QuicksortEngine engine = new QuicksortEngine(8);
+        if (args.length != 3) {
+            System.err.println("Usage: java QuicksortEngine <listCount> <carCount> <maxThreads>");
+        }
+
+        List<List<Car>> cars = RandomUtility.generateKListsOfNCars(Integer.parseInt(args[1]), Integer.parseInt(args[0]));
+        writeCarArraysToFile(cars, false);
+        QuicksortEngine engine = new QuicksortEngine(Integer.parseInt(args[2]));
         List<Thread> threadlist = new ArrayList<>();
-        engine.addJobs(cars, threadlist);
+        List<List<SortJob>> combineJobs = new ArrayList<>();
+        SortJob[] originalJobReferences = engine.addJobs(cars, threadlist, combineJobs);
+
+
+        if (engine.isPartialSort) {
+            engine.partialSortCompletionTimeList = new ArrayList<>(cars.size());
+            synchronized (engine.completionMonitor) {
+                while (engine.getThreadPool().size() < engine.activeThreads) {
+                    engine.completionMonitor.wait();
+                }
+            }
+            engine.addCombineJobs(combineJobs);
+
+
+
+        }
+
+
 
         synchronized (engine.completionMonitor) {
             while (engine.getThreadPool().size() < engine.activeThreads) {
-                System.out.println("activeThreads: " + engine.activeThreads + " thread pool size: " + engine.getThreadPool().size());
                 engine.completionMonitor.wait();
             }
         }
@@ -143,7 +229,25 @@ public class QuicksortEngine {
             thread.interrupt();
             thread.join();
         }
+        cars = engine.finalSortedList;
+        for (int i = 0; i < cars.size(); i++)
+        {
+            List<Long> timeList = engine.partialSortCompletionTimeList.get(i);
+            long max = Collections.max(timeList.subList(0, timeList.size()-1) );
+            long sum = LongStream.range(0, timeList.size()-1).map(ele -> timeList.get((int) ele)).sum();
 
-        writeCarArraysToFile(cars, false);
+            System.out.println("List " + (i+1) + " Real Time: " +
+                    (max + timeList.get(timeList.size()-1)) + "ms");
+
+            System.out.println("CPU TIME (ms) : ");
+            for (int j =0; j < timeList.size(); j++) {
+                System.out.print(timeList.get(j));
+                if (j != timeList.size()-1) System.out.print(" + ");
+            }
+            System.out.print( " = " + sum + "ms\n\n");
+        }
+        writeCarArraysToFile(cars, true);
+        //cars.set(0,combineSortedSublists(combineJobs.get(0)));
+
     }
 }

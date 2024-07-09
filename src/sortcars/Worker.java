@@ -1,5 +1,7 @@
 package sortcars;
 
+import java.util.List;
+
 public class Worker implements Runnable {
     private final QuicksortEngine engine;
 
@@ -33,10 +35,27 @@ public class Worker implements Runnable {
 
     private void executeJob(SortJob job) {
         if (job != null) {
-            if (job.sortEntireList()) {
+            if (job.isCombineJob()) {
+                long startTime = System.currentTimeMillis();
+                List<Car> sortedList = QuicksortEngine.combineSortedSublists(job.getCombineJob());
+                long endTime = System.currentTimeMillis();
+                synchronized (engine)
+                {
+                    engine.getFinalSortedList().add(job.partialSortGroup, sortedList);
+                    job.partialSortCompletionTimeList.add(endTime - startTime);
+                    engine.partialSortCompletionTimeList.add(job.partialSortGroup, job.partialSortCompletionTimeList);
+                }
+            }
+            else if (job.sortEntireList()) {
+                long startTime = System.currentTimeMillis();
                 QuicksortEngine.quickSort(job.getList());
+                long endTime = System.currentTimeMillis();
+                job.partialSortCompletionTime = endTime - startTime;
             } else {
+                long startTime = System.currentTimeMillis();
                 QuicksortEngine.quickSort(job.getList(), job.getStartIndex(), job.getEndIndex());
+                long endTime = System.currentTimeMillis();
+                job.partialSortCompletionTime = endTime - startTime;
             }
         }
     }
