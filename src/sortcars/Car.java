@@ -3,6 +3,7 @@ package sortcars;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -78,63 +79,36 @@ public class Car implements Comparable<Car>{
         else
             return compareDestination;
     }
-
-    public static void writeCarArraysToFile(List<LinkedList<Car>> carsList, boolean sorted){
+    public static void writeCarArraysToFile(List<List<Car>> carsList, boolean sorted) {
         String suffix = sorted ? "-sorted" : "";
         File folder = new File("cars");
         if (!folder.exists()) folder.mkdir();
 
-        //if it still doesn't exist exit
         if (!folder.exists()) {
             System.err.println("Folder does not exist");
             System.exit(1);
         }
 
         try {
-            //for (int i = 0; i < arr.length; i++) {
             int i = 0;
-            for (LinkedList<Car> singleCarList : carsList) {
-
-
-                String filename = "cars" + (i+1) + suffix + ".txt";
+            for (List<Car> carList : carsList) {
+                String filename = "cars" + (i + 1) + suffix + ".txt";
                 StringBuilder builder = new StringBuilder();
-                BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(
-                        new File("cars" + File.separator + filename)));
-                //Car[] carFileElements = arr[i];
-                int j = 0;
-                int length = singleCarList.size();
-                for (Car carFileElement : singleCarList) {
-                    builder.append(carFileElement.toString());
-                    //don't add a newline on last line
-                    if (j < length - 1) builder.append("\n");
-                    j++;
+                BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(new File("cars" + File.separator + filename)));
+                for (int j = 0; j < carList.size(); j++) {
+                    builder.append(carList.get(j).toString());
+                    if (j < carList.size() - 1) builder.append("\n");
                 }
                 bufferedWriter.write(builder.toString());
                 bufferedWriter.flush();
                 bufferedWriter.close();
                 i++;
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
-    public static void main(String[] args) {
-
-        List<LinkedList<Car>> cars = RandomUtility.generateKListsOfNCars(100,3);
-        for (Car c : cars.get(0)) System.out.println(c);
-        ListIterator<Car> listIterator = cars.get(0).listIterator(0);
-        Car car1 = listIterator.next();
-        ListIterator<Car> listIterator2 = cars.get(0).listIterator(1);
-        Car car2 = listIterator2.next();
-       // QuicksortEngine.swap(listIterator, car1, listIterator2, car2);
-        QuicksortEngine.quickSort(cars.get(0),0, 99);
-        writeCarArraysToFile(cars, false);
-
-        //System.out.println(cars.);
-    }
 
 
 }

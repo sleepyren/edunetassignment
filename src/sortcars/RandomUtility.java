@@ -1,9 +1,6 @@
 package sortcars;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class RandomUtility {
     private static final Random random = new Random();
@@ -30,14 +27,11 @@ public class RandomUtility {
     private static int generateColor(){
         return random.nextInt(4);
     }
-
-    public static LinkedList<Car> generateNCars(int n) {
-
-        //Car[] cars = new Car[n];
-        LinkedList<Car> cars = new LinkedList<>();
+    public static List<Car> generateNCars(int n) {
+        List<Car> cars = new ArrayList<>();
         HashSet<String> set = new HashSet<>();
-        for(int i = 0; i < n; i++){
-        {
+
+        for (int i = 0; i < n; i++) {
             String location = generateLocation();
             int color = generateColor();
             String serialNumber = generateSerialNumber();
@@ -45,23 +39,21 @@ public class RandomUtility {
             while (set.contains(serialNumber)) serialNumber = generateSerialNumber();
             set.add(serialNumber);
 
-            cars.add(new Car(i, serialNumber, location, color));
-            //cars[i] = new Car(i, serialNumber, location, color);
-
+            Car newCar = new Car(i, serialNumber, location, color);
+            cars.add(newCar);
         }
-    }
+
         return cars;
     }
 
-    public static List<LinkedList<Car>> generateKListsOfNCars(int n, int k) {
-        //Car[][] cars = new Car[k][n];
-        LinkedList<LinkedList<Car>> cars = new LinkedList<>();
-        for (int i = 0; i < k; i++){
-            cars.add(generateNCars(n));
-
+    public static List<List<Car>> generateKListsOfNCars(int n, int k) {
+        List<List<Car>> allCars = new ArrayList<>();
+        for (int i = 0; i < k; i++) {
+            allCars.add(generateNCars(n));
         }
-        return cars;
+        return allCars;
     }
+
 
 
 

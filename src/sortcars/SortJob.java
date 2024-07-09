@@ -1,24 +1,30 @@
 package sortcars;
 
-import java.util.LinkedList;
+import java.util.List;
 
 public class SortJob {
 
 
 
-    private final LinkedList<Car> list;
-    private final int startIndex;
-    private final int endIndex;
+    private final List<Car> list;
+    private  int startIndex;
+    private int endIndex;
+    private final boolean sortEntireList;
 
+    public SortJob(List<Car> list) {
+        this.list = list;
+        this.sortEntireList = true;
+    }
 
-    public SortJob(LinkedList<Car> list, int startIndex, int endIndex) {
+    public SortJob(List<Car> list, int startIndex, int endIndex) {
         this.list = list;
         this.startIndex = startIndex;
         this.endIndex = endIndex;
+        this.sortEntireList = false;
     }
 
 
-    public LinkedList<Car> getList() {
+    public List<Car> getList() {
         return list;
     }
 
@@ -29,4 +35,6 @@ public class SortJob {
     public int getEndIndex() {
         return endIndex;
     }
+
+    public boolean sortEntireList() { return sortEntireList; }
 }
