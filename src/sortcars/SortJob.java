@@ -16,10 +16,12 @@ public class SortJob {
     public int partialSortGroup;
     public long partialSortCompletionTime;
     public List<Long> partialSortCompletionTimeList;
+    public int sortId;
 
-    public SortJob(List<Car> list) {
+    public SortJob(List<Car> list, int sortId) {
         this.list = list;
         this.sortEntireList = true;
+        this.sortId = sortId;
     }
 
     public SortJob(List<Car> list, int startIndex, int endIndex, int partialSortGroup) {

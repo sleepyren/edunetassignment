@@ -6,9 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="d99ca002-9ed5-45ff-b870-66af6b3fc5c2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cars/cars1-sorted.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cars/cars1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cars/cars2-sorted.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cars/cars2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cars/cars3-sorted.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cars/cars3.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cars/cars4-sorted.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cars/cars4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cars/cars5-sorted.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cars/cars5.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sortcars/QuicksortEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sortcars/QuicksortEngine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sortcars/SortJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sortcars/SortJob.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sortcars/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sortcars/Worker.java" afterDir="false" />
@@ -70,7 +77,7 @@
     <configuration name="QuicksortEngine" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="sortcars.QuicksortEngine" />
       <module name="edunetassignment" />
-      <option name="PROGRAM_PARAMETERS" value="4 1000000 20" />
+      <option name="PROGRAM_PARAMETERS" value="8 100000 8" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="sortcars.*" />
@@ -106,7 +113,7 @@
       <workItem from="1720123422422" duration="20002000" />
       <workItem from="1720325606920" duration="59591000" />
       <workItem from="1720501784316" duration="13327000" />
-      <workItem from="1720544036060" duration="4946000" />
+      <workItem from="1720544036060" duration="12520000" />
     </task>
     <servers />
   </component>

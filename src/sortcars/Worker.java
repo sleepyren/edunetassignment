@@ -50,7 +50,10 @@ public class Worker implements Runnable {
                 long startTime = System.currentTimeMillis();
                 QuicksortEngine.quickSort(job.getList());
                 long endTime = System.currentTimeMillis();
-                job.partialSortCompletionTime = endTime - startTime;
+                //job.partialSortCompletionTime = endTime - startTime;
+                synchronized (engine) {
+                    engine.sortCompletionTimeList.set(job.sortId, endTime - startTime);
+                }
             } else {
                 long startTime = System.currentTimeMillis();
                 QuicksortEngine.quickSort(job.getList(), job.getStartIndex(), job.getEndIndex());
