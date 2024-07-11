@@ -41,6 +41,7 @@ public class QuicksortEngine {
         }
     }
 
+    //O(N * logN) -> 3 partition variation
     public static void quickSort(List<Car> cars) {
         quickSort(cars, 0, cars.size() - 1);
     }
@@ -153,6 +154,7 @@ public class QuicksortEngine {
         }
     }
 
+    //O(N * logK)
     public static List<Car> combineSortedSublists(List<SortJob> jobList) {
         PriorityQueue<CarWithIndex> minHeap = new PriorityQueue<>(Comparator.comparing(carWithIndex -> carWithIndex.car));
         List<Car> combinedList = new ArrayList<>();
