@@ -4,6 +4,7 @@ import sortcarsv2.Worker;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 
 public class QuicksortEngine {
@@ -29,23 +30,65 @@ public class QuicksortEngine {
         }
     }
 
+    synchronized void waitForCompletion()
+    {
+        while (activeThreads != this.threadPool.size())
+        {
+            try{
+                this.wait();
+            }
+            catch (InterruptedException e)
+            {
+                for (Thread thread : this.threadPool)
+                {
+                    thread.interrupt();
+                    try
+                    { thread.join();}
+
+                    catch (InterruptedException e2)
+                    {e2.printStackTrace();
+                    return;}
+
+                }
+                Thread.currentThread().interrupt();
+                System.err.println("Thread Interrupted");
+                return;
+            }
+        }
+        for (Thread thread : this.threadPool)
+        {
+            try
+            {
+                thread.interrupt();
+                thread.join();}
+
+            catch (InterruptedException e2)
+            {e2.printStackTrace();
+                return;}
+
+        }
+    }
 
 
-    void parallelQuicksort(SortJob job) {
+      void parallelQuicksort(SortJob job) {
 
         if (job.startIndex >=  job.endIndex) return;
 
+        //50 elements is small enough to sort in one thread
         if (job.endIndex - job.startIndex  <= 50) {
             normalQuicksort(job.list, job.startIndex, job.endIndex);
         }
         else
         {
             int pivot = partition(job.list, job.startIndex, job.endIndex);
-            SortJob leftSide = new SortJob(job.startIndex, )
+            SortJob leftSide = new SortJob(job.startIndex, pivot - 1, job.list);
+            SortJob rightSide = new SortJob(pivot + 1, job.endIndex,  job.list);
+            addJobs(leftSide);
+            addJobs(rightSide);
         }
     }
 
-    static void normalQuicksort(ArrayList<Car> arr, int left, int right) {
+    static void normalQuicksort(List<Car> arr, int left, int right) {
 
         if (left < right)
         {
@@ -94,7 +137,7 @@ public class QuicksortEngine {
 
 
     //simple partition
-    public static int partition(ArrayList<Car> arr, int left, int right) {
+    public static int partition(List<Car> arr, int left, int right) {
         int pivot = left;
         left++;
         while (left <= right) {
@@ -112,11 +155,22 @@ public class QuicksortEngine {
         return right;
     }
 
-    public static void swap(ArrayList<Car> arr, int i, int j) {
+    public static void swap(List<Car> arr, int i, int j) {
         Car temp = arr.get(i);
         arr.set(i, arr.get(j));
         arr.set(j, temp);
     }
 
+    public static void main(String[] args) {
+        QuicksortEngine engine = new QuicksortEngine(10);
+        List<Car> cars = RandomUtility.generateNCars(100000);
+        SortJob job = new SortJob(0, cars.size()-1, cars);
+        engine.parallelQuicksort(job);
+        List<List<Car>> listofLists = new ArrayList<>();
+        listofLists.add(cars);
+        engine.waitForCompletion();
+        Car.writeCarArraysToFile(listofLists, true);
+
+    }
 
 }

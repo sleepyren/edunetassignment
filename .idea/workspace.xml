@@ -6,17 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="d99ca002-9ed5-45ff-b870-66af6b3fc5c2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cars/cars1-sorted.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cars/cars1-sorted.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cars/cars1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cars/cars1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cars/cars2-sorted.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cars/cars2-sorted.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cars/cars2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cars/cars2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cars/cars3-sorted.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cars/cars3-sorted.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cars/cars3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cars/cars3.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cars/cars4-sorted.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cars/cars4-sorted.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cars/cars4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cars/cars4.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cars/cars5-sorted.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cars/cars5-sorted.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cars/cars5.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cars/cars5.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sortcars/QuicksortEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sortcars/QuicksortEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sortcarsv2/QuicksortEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sortcarsv2/QuicksortEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sortcarsv2/SortJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sortcarsv2/SortJob.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sortcarsv2/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sortcarsv2/Worker.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,25 +39,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Car.executor&quot;: &quot;Run&quot;,
-    &quot;Application.QuicksortEngine.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Renaldo/repositories/edunetassignment&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Car.executor": "Run",
+    "Application.QuicksortEngine.executor": "Run",
+    "Application.sortcarsv2.QuicksortEngine.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Renaldo/repositories/edunetassignment",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="QodanaReportsService">
     <option name="descriptions">
       <ReportDescription localRun="true" path="/private/var/folders/gf/dd2yrxh15q52pymk0g0mz84h0000gn/T/qodana_output/qodana.sarif.json" reportGuid="7879ac2b-df25-4369-aa02-9294ea3965a8" reportId="edunetassignment/qodana/2024-07-08" />

@@ -14,17 +14,21 @@ public class Worker implements Runnable {
                 {
                     try
                     {
+                        engine.threadPool.add(Thread.currentThread());
                     engine.wait();
                     }
                     catch (InterruptedException e)
                     {
+                        engine.activeThreads--;
                         Thread.currentThread().interrupt();
                         System.err.println("Thread Interrupted");
                         engine.threadPool.remove(Thread.currentThread());
                         return;
                     }
                 }
+                engine.threadPool.remove(Thread.currentThread());
                 SortJob job = engine.jobPool.poll();
+                System.out.println("Executing job: \n");
                 executeJob(job);
             }
 
@@ -34,6 +38,6 @@ public class Worker implements Runnable {
 
     void executeJob(SortJob job)
     {
-
+    engine.parallelQuicksort(job);
     }
 }
