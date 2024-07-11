@@ -21,6 +21,7 @@ public class QuicksortEngine {
     public synchronized void addJobs(SortJob job)
     {
         jobPool.addLast(job);
+        this.notify();
         if (activeThreads < maxThreads)
         {
             activeThreads++;
@@ -30,7 +31,7 @@ public class QuicksortEngine {
         }
     }
 
-    synchronized void waitForCompletion()
+    public synchronized void waitForCompletion()
     {
         while (activeThreads != this.threadPool.size())
         {

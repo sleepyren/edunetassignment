@@ -27,7 +27,7 @@ public class Worker implements Runnable {
                     }
                 }
                 engine.threadPool.remove(Thread.currentThread());
-                SortJob job = engine.jobPool.poll();
+                SortJob job = engine.jobPool.pollFirst();
                 System.out.println("Executing job: \n");
                 executeJob(job);
             }
