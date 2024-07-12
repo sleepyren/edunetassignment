@@ -122,8 +122,15 @@ public class QuicksortEngine {
 
     public static void main(String[] args)
     {
-        QuicksortEngine engine = new QuicksortEngine(10);
-        List<List<Car>> list = RandomUtility.generateKListsOfNCars(100000,3);
+        if (args.length != 3) {
+            System.err.println("Usage: java QuicksortEngine <listCount> <carCount> <maxThreads>");
+            return;
+        }
+
+
+        QuicksortEngine engine = new QuicksortEngine(Integer.parseInt(args[2]));
+        List<List<Car>> list = RandomUtility.generateKListsOfNCars(
+                Integer.parseInt(args[1]),Integer.parseInt(args[0]));
         Car.writeCarArraysToFile(list, false);
 
 
