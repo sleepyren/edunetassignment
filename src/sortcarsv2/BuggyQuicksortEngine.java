@@ -21,47 +21,56 @@ public class QuicksortEngine {
     public synchronized void addJobs(SortJob job)
     {
         jobPool.addLast(job);
-        this.notify();
+        //this.notify();
         if (activeThreads < maxThreads)
         {
-            activeThreads++;
+            this.activeThreads++;
             Thread newThread = new Thread(new Worker(this));
-            threadPool.add(newThread);
+            //threadPool.add(newThread);
             newThread.start();
         }
     }
 
     public synchronized void waitForCompletion()
     {
-        while (activeThreads != this.threadPool.size())
+        //needs to be || not && because thread pool could be full but there are still jobs
+        while (activeThreads != this.threadPool.size() || this.jobPool.size() != 0)
         {
             try{
+                this.notifyAll();
                 this.wait();
+
             }
             catch (InterruptedException e)
             {
-                for (Thread thread : this.threadPool)
-                {
-                    thread.interrupt();
-                    try
-                    { thread.join();}
-
-                    catch (InterruptedException e2)
-                    {e2.printStackTrace();
-                    return;}
-
-                }
-                Thread.currentThread().interrupt();
-                System.err.println("Thread Interrupted");
-                return;
+                e.printStackTrace();
             }
         }
-        for (Thread thread : this.threadPool)
+
+    }
+
+
+    //this function is called after completion
+    //the worker threads can still add and remove themselves from the pool
+    //suppose there is one thread that wakes up other threads
+    //these threads will wake up remove themselves from the pool,
+    //then add themselves, threadPoolReference makes a clone of the references
+    //before any other thread even edits it, therefore it does not matter
+    //if they edit it
+    public void terminateThreads()
+    {
+        List<Thread> threadPoolReference;
+        synchronized (this){
+
+            threadPoolReference = new ArrayList<>(this.threadPool);
+        }
+        for (Thread thread : threadPoolReference)
         {
             try
             {
                 thread.interrupt();
-                thread.join();}
+                thread.join();
+            }
 
             catch (InterruptedException e2)
             {e2.printStackTrace();
@@ -166,10 +175,12 @@ public class QuicksortEngine {
         QuicksortEngine engine = new QuicksortEngine(10);
         List<Car> cars = RandomUtility.generateNCars(100000);
         SortJob job = new SortJob(0, cars.size()-1, cars);
-        engine.parallelQuicksort(job);
+       //engine.parallelQuicksort(job);
+        normalQuicksort(cars, 0 , cars.size() - 1);
         List<List<Car>> listofLists = new ArrayList<>();
         listofLists.add(cars);
-        engine.waitForCompletion();
+       // engine.waitForCompletion();
+        //engine.terminateThreads();
         Car.writeCarArraysToFile(listofLists, true);
 
     }
