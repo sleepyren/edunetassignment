@@ -1,8 +1,8 @@
 package sortcarsv2;
 
-public class Worker implements Runnable {
-    private final QuicksortEngine engine;
-    public Worker(QuicksortEngine engine) {
+public class BuggyWorker implements Runnable {
+    private final BuggyQuicksortEngine engine;
+    public BuggyWorker(BuggyQuicksortEngine engine) {
         this.engine = engine;
     }
 

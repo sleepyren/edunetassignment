@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d99ca002-9ed5-45ff-b870-66af6b3fc5c2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sortcarsv2/QuicksortEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sortcarsv2/QuicksortEngine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sortcarsv2/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sortcarsv2/Worker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sortcarsv2/BuggyQuicksortEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sortcarsv2/BuggyQuicksortEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sortcarsv2/BuggyWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sortcarsv2/BuggyWorker.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,8 +40,9 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.BuggyQuicksortEngine.executor": "Debug",
     "Application.Car.executor": "Run",
-    "Application.QuicksortEngine.executor": "Debug",
+    "Application.QuicksortEngine.executor": "Run",
     "Application.sortcarsv2.QuicksortEngine.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
@@ -69,8 +70,8 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="sortcarsv2.QuicksortEngine" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="sortcarsv2.QuicksortEngine" />
+    <configuration name="BuggyQuicksortEngine" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="sortcarsv2.BuggyQuicksortEngine" />
       <module name="edunetassignment" />
       <option name="PROGRAM_PARAMETERS" value="8 100000 14" />
       <extension name="coverage">
@@ -85,7 +86,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.sortcarsv2.QuicksortEngine" />
+        <item itemvalue="Application.BuggyQuicksortEngine" />
       </list>
     </recent_temporary>
   </component>
@@ -110,21 +111,11 @@
       <workItem from="1720501784316" duration="13327000" />
       <workItem from="1720544036060" duration="12520000" />
       <workItem from="1720647145082" duration="7982000" />
+      <workItem from="1720746886685" duration="17996000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/sortcarsv2/QuicksortEngine.java</url>
-          <line>170</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

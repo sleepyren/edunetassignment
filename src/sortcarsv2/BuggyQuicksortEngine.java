@@ -1,20 +1,18 @@
 package sortcarsv2;
 
-import sortcarsv2.Worker;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-public class QuicksortEngine {
+public class BuggyQuicksortEngine {
 
     LinkedList<Thread> threadPool = new LinkedList<>();
     LinkedList<SortJob> jobPool = new LinkedList<>();
     final int maxThreads;
     int activeThreads = 0;
 
-    public QuicksortEngine(int maxThreads) {
+    public BuggyQuicksortEngine(int maxThreads) {
         this.maxThreads = maxThreads;
     }
 
@@ -25,7 +23,7 @@ public class QuicksortEngine {
         if (activeThreads < maxThreads)
         {
             this.activeThreads++;
-            Thread newThread = new Thread(new Worker(this));
+            Thread newThread = new Thread(new BuggyWorker(this));
             //threadPool.add(newThread);
             newThread.start();
         }
@@ -172,7 +170,7 @@ public class QuicksortEngine {
     }
 
     public static void main(String[] args) {
-        QuicksortEngine engine = new QuicksortEngine(10);
+        BuggyQuicksortEngine engine = new BuggyQuicksortEngine(10);
         List<Car> cars = RandomUtility.generateNCars(100000);
         SortJob job = new SortJob(0, cars.size()-1, cars);
        //engine.parallelQuicksort(job);
