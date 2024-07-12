@@ -72,7 +72,7 @@ public class QuicksortEngine {
     }
 
     void waitAndTerminate()
-    {
+    {ArrayList<Thread> threadPool;
         synchronized (this) {
 
 
@@ -85,9 +85,13 @@ public class QuicksortEngine {
                     e.printStackTrace();
                 }
             }
+
+            threadPool= new ArrayList<>(this.threadPool);
+
         }
 
-        ArrayList<Thread> threadPool = new ArrayList<>(this.threadPool);
+
+
 
         for (Thread thread : threadPool) {
             try {
