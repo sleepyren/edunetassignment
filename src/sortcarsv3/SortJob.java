@@ -1,6 +1,5 @@
 package sortcarsv3;
 
-import sortcarsv3.QuicksortEngine;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,12 +65,18 @@ public class SortJob {
 
     }
 
-    public void quickSort() {
+    //partition current job and add two more jobs to list
+    private void quickSort() {
         if (this.startIndex < this.endIndex) {
             this.partition();
             this.addChildJobs();
         }
 
+    }
+
+    public void executeJob()
+    {
+        quickSort();
     }
 
 
