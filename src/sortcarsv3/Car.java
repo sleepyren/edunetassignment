@@ -106,11 +106,6 @@ public class Car implements Comparable<Car>{
         }
     }
 
-    public static void swap(List<Car> arr, int i, int j) {
-        Car temp = arr.get(i);
-        arr.set(i, arr.get(j));
-        arr.set(j, temp);
-    }
 
 
 

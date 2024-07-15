@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="d99ca002-9ed5-45ff-b870-66af6b3fc5c2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sortcarsv3/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sortcarsv3/Car.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sortcarsv3/QuicksortEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sortcarsv3/QuicksortEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sortcarsv3/SortJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sortcarsv3/SortJob.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,27 +39,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.BuggyQuicksortEngine.executor&quot;: &quot;Debug&quot;,
-    &quot;Application.Car.executor&quot;: &quot;Run&quot;,
-    &quot;Application.QuicksortEngine.executor&quot;: &quot;Run&quot;,
-    &quot;Application.sortcarsv2.QuicksortEngine.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Renaldo/repositories/edunetassignment&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.BuggyQuicksortEngine.executor": "Debug",
+    "Application.Car.executor": "Run",
+    "Application.QuicksortEngine.executor": "Run",
+    "Application.sortcarsv2.QuicksortEngine.executor": "Debug",
+    "Application.sortcarsv3.QuicksortEngine.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Renaldo/repositories/edunetassignment",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="QodanaReportsService">
     <option name="descriptions">
       <ReportDescription localRun="true" path="/private/var/folders/gf/dd2yrxh15q52pymk0g0mz84h0000gn/T/qodana_output/qodana.sarif.json" reportGuid="7879ac2b-df25-4369-aa02-9294ea3965a8" reportId="edunetassignment/qodana/2024-07-08" />
@@ -67,7 +71,7 @@
       <recent name="sortcarsv2" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.QuicksortEngine">
+  <component name="RunManager" selected="Application.sortcarsv3.QuicksortEngine">
     <configuration name="BuggyQuicksortEngine" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="sortcarsv2.BuggyQuicksortEngine" />
       <module name="edunetassignment" />
@@ -96,12 +100,28 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="sortcarsv3.QuicksortEngine" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="sortcarsv3.QuicksortEngine" />
+      <module name="edunetassignment" />
+      <option name="PROGRAM_PARAMETERS" value="4 100000 8" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="sortcarsv3.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
+      <item itemvalue="Application.sortcarsv3.QuicksortEngine" />
       <item itemvalue="Application.BuggyQuicksortEngine" />
       <item itemvalue="Application.QuicksortEngine" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.sortcarsv3.QuicksortEngine" />
         <item itemvalue="Application.QuicksortEngine" />
         <item itemvalue="Application.BuggyQuicksortEngine" />
       </list>
@@ -130,7 +150,7 @@
       <workItem from="1720647145082" duration="7982000" />
       <workItem from="1720746886685" duration="19911000" />
       <workItem from="1720889452802" duration="5979000" />
-      <workItem from="1720994582902" duration="235000" />
+      <workItem from="1720994582902" duration="5321000" />
     </task>
     <servers />
   </component>

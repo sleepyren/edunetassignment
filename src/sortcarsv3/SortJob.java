@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import sortcarsv3.Car;
 
-import static sortcarsv3.Car.swap;
 
 
 public class SortJob {
@@ -30,15 +29,18 @@ public class SortJob {
         this.list = parent.list;
     }
 
+    public static void swap(List<Car> arr, int i, int j) {
+        Car temp = arr.get(i);
+        arr.set(i, arr.get(j));
+        arr.set(j, temp);
+    }
+
     private void addChildJobs() {
         SortJob LeftSort = new SortJob(this.startIndex, this.pivot-1, this);
         SortJob RightSort = new SortJob(this.pivot+1, this.endIndex, this);
 
-        synchronized (this.engine)
-        {
-            this.engine.jobs.add(LeftSort);
-            this.engine.jobs.add(RightSort);
-        }
+        this.engine.addJob(LeftSort);
+        this.engine.addJob(RightSort);
     }
 
     private void partition() {
