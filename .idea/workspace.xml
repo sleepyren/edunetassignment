@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d99ca002-9ed5-45ff-b870-66af6b3fc5c2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sortcarsv3/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sortcarsv3/Car.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sortcarsv3/QuicksortEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sortcarsv3/QuicksortEngine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sortcarsv3/SortJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sortcarsv3/SortJob.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -45,7 +43,7 @@
     "Application.Car.executor": "Run",
     "Application.QuicksortEngine.executor": "Run",
     "Application.sortcarsv2.QuicksortEngine.executor": "Debug",
-    "Application.sortcarsv3.QuicksortEngine.executor": "Run",
+    "Application.sortcarsv3.QuicksortEngine.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
@@ -103,7 +101,7 @@
     <configuration name="sortcarsv3.QuicksortEngine" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="sortcarsv3.QuicksortEngine" />
       <module name="edunetassignment" />
-      <option name="PROGRAM_PARAMETERS" value="4 100000 8" />
+      <option name="PROGRAM_PARAMETERS" value="2 100000 8" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="sortcarsv3.*" />
@@ -150,7 +148,7 @@
       <workItem from="1720647145082" duration="7982000" />
       <workItem from="1720746886685" duration="19911000" />
       <workItem from="1720889452802" duration="5979000" />
-      <workItem from="1720994582902" duration="5321000" />
+      <workItem from="1720994582902" duration="6833000" />
     </task>
     <servers />
   </component>

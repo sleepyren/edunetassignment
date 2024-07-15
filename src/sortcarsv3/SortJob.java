@@ -67,12 +67,30 @@ public class SortJob {
 
     }
 
+    private void sequentialQuicksort(SortJob job)
+    {
+        if (job.startIndex < job.endIndex)
+        {
+            job.partition();
+            SortJob leftSort = new SortJob(job.startIndex, job.pivot -1 , job);
+            SortJob rightSort = new SortJob(job.pivot + 1, job.endIndex, job);
+            sequentialQuicksort(leftSort);
+            sequentialQuicksort(rightSort);
+        }
+    }
+
     //partition current job and add two more jobs to list
     private void quickSort() {
-        if (this.startIndex < this.endIndex) {
+
+        if (this.startIndex >= this.endIndex) return;
+
+
+        if (this.endIndex - this.startIndex > 50) {
             this.partition();
             this.addChildJobs();
         }
+        else
+            sequentialQuicksort(this);
 
     }
 
